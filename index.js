@@ -1,18 +1,37 @@
 console.log('My code is running');
 var list_item_counter = 4;
 
+document.getElementById('list1').addEventListener("change", changedCheckbox);
+document.getElementById('list2').addEventListener("change", changedCheckbox);
+document.getElementById('list3').addEventListener("change", changedCheckbox);
+
+function changedCheckbox(element) {
+    let associatedText = [...element.target.parentElement.children][element.target.parentElement.children.length - 1];
+    if (this.checked) {
+        associatedText.style.textDecoration = 'line-through';
+    }
+    else {
+        associatedText.style.textDecoration = '';
+    }
+}
+
 function addItem() {
+    let existingTextbox = document.getElementById("userInput");
+    if (existingTextbox) {
+        alert('Please fill in the existing textbox before adding another item');
+        return
+    }
+
     let listWrapper = document.getElementsByClassName("list-wrapper")[0];
     let newItem = document.createElement('div');
     let newInput = document.createElement('input');
-    // let newSpan = document.createElement('span');
     let newTextBox = document.createElement('input');
 
     newItem.classList.add("list-item");
     newInput.setAttribute("type", "checkbox");
     newInput.setAttribute("name", "list" + list_item_counter.toString());
     newInput.setAttribute("id", "list" + list_item_counter.toString());
-    // newSpan.innerHTML = "Testing"
+    newInput.addEventListener("change", changedCheckbox);
 
     newTextBox.setAttribute("type", "text");
     newTextBox.setAttribute("id", "userInput");
@@ -25,14 +44,12 @@ function addItem() {
     list_item_counter++;
 
     newItem.appendChild(newInput);
-    // newItem.appendChild(newSpan);
     newItem.appendChild(newTextBox);
     listWrapper.appendChild(newItem);
 
 };
 
 function addEnterHandler(event) {
-    console.log("i made it here");
     let listItems = document.getElementsByClassName('list-item');
     let lastListItem = listItems[listItems.length - 1];
     let childToRemove = lastListItem.children[1];
@@ -45,6 +62,11 @@ function addEnterHandler(event) {
 };
 
 function removeItem() {
+    let existingTextbox = document.getElementById('remove-item-textbox');
+    if (existingTextbox) {
+        alert("Please input a value in the existing box before removing additional items");
+        return
+    }
     let newTextBox = document.createElement('input');
     let menuWrapper = document.getElementById('menu-wrapper');
 
