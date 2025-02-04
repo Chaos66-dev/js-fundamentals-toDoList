@@ -29,7 +29,7 @@ h1 {
 
 } */
 
-.menu-wrapper {
+#menu-wrapper {
     grid-column: 3;
     display: flex;
     justify-content: space-around;
@@ -60,4 +60,8 @@ h1 {
 
 span {
     padding-left: 0.5em;
+}
+
+#remove-item-textbox {
+    width: 4em;
 }
